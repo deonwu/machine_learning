@@ -9,8 +9,12 @@ X = data(:, [1, 2]); y = data(:, 3);
 
 X = [ones(m, 1) X];
 
-initial_theta = zeros(n + 1, 1);
+%initial_theta = zeros(n + 1, 1);
 
-theta = GradientDes(@(t)(costFunction(t, X, y)), initial_theta, 10)
+initial_theta = [0;0;0];
 
-%[theta, cost] = fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
+% theta = GradientDes(@(t)(costFunction(t, X, y)), initial_theta, 10)
+
+options = optimset('GradObj', 'on', 'MaxIter', 4);
+
+[theta, cost, exit_flag] = fminunc(@(t)(costFunction(t, X, y)), initial_theta, options)

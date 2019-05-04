@@ -9,12 +9,12 @@ function grad = GradientDes(fun, initialTheta, times)
 
 		printf("\n");
 		%fprintf('i: %f,   cost: %s,  grad: %f \n\n', i, cost, new_grad);
-		grad = grad - 0.01 * new_grad
 
-		if(abs(new_cost - cost) < 0.000001)
+		if(grad' * new_grad < 0.000001 && abs(cost - new_cost) < 1)
 			break;
 		else
 			cost = new_cost;
+			grad = grad - 0.01 * new_grad
 		end
 
 	end
